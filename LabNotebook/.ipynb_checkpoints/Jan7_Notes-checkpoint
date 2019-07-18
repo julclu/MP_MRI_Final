@@ -1,0 +1,76 @@
+1. Today I am reprocessing all of the diffusion data from the old stuff. 
+2. I have started a screen and am running resample_diffu.py on po1_preop_recur in /data/RECglioma/archived, as well as batch_svk_diffu.py on them all. 
+3. My next goal is to run all of the MRSI processing & create a QC program for all data for each modality!
+4. I am going to base my script off of the script for QC'ing the perfusion data that I wrote. I will have to break this into chunks in order to complete this. Ideally I'd like to check for: 
+a. Diffusion alignment
+b. Biopsies overlaid on diffusion for good quality check
+c. Perfusion alignment 
+d. Biopsies overlaid on perfusion (firsta) for quality check - make sure to remove those in the black completely from analysis
+e. MRSI biopsy quality 
+Jan 9: 
+Going to make this program. Will be tough because there is no cyberduck/filezilla connection right now. Not sure why that might be. 
+
+Jan 15: Today I realized that there is no point in redoing all of the MRSI or perfusion b/c MRSI doesn't work and Sarah has already redone. 
+=======================SCRIPTS RUN: 
+
+
+Just ran batch_tab_to_csv.dev.x on /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Process_Old_P01/po1_preop_recur_process_list.125.csv and will go collect the data from there. 
+######### ANAT
+get_anat_biopsy_data.py --csv_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Process_Old_P01/ --csv_name po1_preop_recur_process_list.125.csv --cohort_name po1_preop_recur --output_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Process_Old_P01/ --output_file po1_preop_recur_anat_median_biopsy.csv --measure median
+
+get_anat_biopsy_data.py --csv_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Collect_REC_HGG_Data --csv_name rec_hgg_process_list.79.csv --cohort_name REC_HGG --output_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Collect_REC_HGG_Data --output_file rec_hgg_anat_median_biopsy.csv --measure median
+
+######### DIFFU 1000 - didn't work so had to run ipynb, same w/ DIFFU2000 
+[[ get_diffu1000_biopsy_data.py --csv_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Collect_REC_HGG_Data --csv_name rec_hgg_process_list.79.csv --cohort_name REC_HGG --output_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Collect_REC_HGG_Data --output_file rec_hgg_diffu1000_median_biopsy.csv --measure median ]] 
+open Scripts
+
+
+######## PERF: 
+
+get_perf_biopsy_data.py --csv_name rec_hgg_process_list.79.csv --csv_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Collect_REC_HGG_Data/ --cohort_name REC_HGG --output_file rec_hgg_perf_biopsy.csv --output_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Collect_REC_HGG_Data/
+
+get_perf_biopsy_data.py --csv_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Process_Old_P01/ --csv_name po1_preop_recur_process_list.125.csv --cohort_name po1_preop_recur --output_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Process_Old_P01/ --output_file po1_preop_recur_perf_biopsy.csv 
+
+######## SPEC: 
+get_spec_biopsy_data.py --csv_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Collect_REC_HGG_Data --csv_name rec_hgg_process_list.79.csv --cohort_name REC_HGG --output_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/Collect_REC_HGG_Data --output_file rec_hgg_spec_median_biopsy.csv --measure median
+
+!!!!!!!!!!!!!!
+Now I'm going to QC data on perfusion, exclude biopsy entirely, exclude perfusion, or good to go. 
+
+batch_firsta_valid.dev.py --csv_name old_scans_1-10.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name po1_preop_recur --output_file qc_old_scans_1-10.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_po1_preop_recur/
+
+batch_firsta_valid.dev.py --csv_name old_scans_10-20.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name po1_preop_recur --output_file qc_old_scans_10-20.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_po1_preop_recur/
+
+batch_firsta_valid.dev.py --csv_name old_scans_20-30.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name po1_preop_recur --output_file qc_old_scans_20-30.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_po1_preop_recur/
+
+batch_firsta_valid.dev.py --csv_name old_scans_30-40.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name po1_preop_recur --output_file qc_old_scans_30-40.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_po1_preop_recur/
+
+batch_firsta_valid.dev.py --csv_name old_scans_40-50.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name po1_preop_recur --output_file qc_old_scans_40-50.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_po1_preop_recur/
+
+batch_firsta_valid.dev.py --csv_name old_scans_50-60.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name po1_preop_recur --output_file qc_old_scans_50-60.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_po1_preop_recur/
+
+batch_firsta_valid.dev.py --csv_name old_scans_60-70.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name po1_preop_recur --output_file qc_old_scans_60-70.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_po1_preop_recur/
+
+batch_firsta_valid.dev.py --csv_name old_scans_70-80.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name po1_preop_recur --output_file qc_old_scans_70-80.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_po1_preop_recur/
+
+batch_firsta_valid.dev.py --csv_name old_scans_80-90.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name po1_preop_recur --output_file qc_old_scans_80-90.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_po1_preop_recur/
+
+batch_firsta_valid.dev.py --csv_name old_scans_90-100.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name po1_preop_recur --output_file qc_old_scans_90-100.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_po1_preop_recur/
+
+batch_firsta_valid.dev.py --csv_name old_scans_110-126.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name po1_preop_recur --output_file qc_old_scans_110-126.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_po1_preop_recur/
+
+batch_firsta_valid.dev.py --csv_name new_scans_1-10.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name RECglioma --output_file qc_new_scans_1-10.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_REC_HGG/
+
+batch_firsta_valid.dev.py --csv_name new_scans_10-20.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name RECglioma --output_file qc_new_scans_10-20.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_REC_HGG/
+
+batch_firsta_valid.dev.py --csv_name new_scans_20-30.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name RECglioma --output_file qc_new_scans_20-30.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_REC_HGG/
+
+batch_firsta_valid.dev.py --csv_name new_scans_30-40.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name RECglioma --output_file qc_new_scans_30-40.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_REC_HGG/
+
+batch_firsta_valid.dev.py --csv_name new_scans_40-50.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name RECglioma --output_file qc_new_scans_40-50.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_REC_HGG/
+
+batch_firsta_valid.dev.py --csv_name new_scans_50-60.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name RECglioma --output_file qc_new_scans_50-60.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_REC_HGG/
+
+batch_firsta_valid.dev.py --csv_name new_scans_60-70.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name RECglioma --output_file qc_new_scans_60-70.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_REC_HGG/
+
+batch_firsta_valid.dev.py --csv_name new_scans_70-80.csv --csv_root ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_list_generation/ --cohort_name RECglioma --output_file qc_new_scans_70-80.out.csv --output_dir ~/MultiParametricMRI/MP_MRI_Jan2019/QCData/QC_output_perf_REC_HGG/

@@ -1,0 +1,11 @@
+1. First, creating list of old PO1 data that needs to be reanalyzed with svk_roi_analysis in GetMergeData. This will be done through the cleaning of the pathology notes (no need to analyze things without pathology anyway!) -- This will use po1_preop_recur_path_jan2019.csv. 
+2. That's done, but first we need to resample all of the images in the rois directories. I'm currently working on that in a notebook called batch_resample_rois_munge in preop_convert_work.
+
+Jan 2 2019: 
+1. Ran batch_resample_rois_final.ipynb in preop_convert_work and it works - resampled all old rois to 1x1x1.5 
+2. Need to run batch_svk_anat.py -- just did this on titan on the VPN, using the command batch_svk_anat.py --csv_name po1_preop_recur_process_list.125.csv --csv_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/ --cohort_name po1_preop_recur
+3. Need to go through and QC every biopsy 
+
+Feb 20 2019: 
+batch_svk_anat.py -- just did this on titan on the VPN, using the command 
+batch_svk_anat.py --csv_name po1_preop_recur_process_list.125.csv --csv_dir /home/sf673542/MultiParametricMRI/MP_MRI_Jan2019/GetMergeData/ --cohort_name po1_preop_recur

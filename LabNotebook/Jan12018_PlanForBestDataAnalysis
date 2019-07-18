@@ -1,0 +1,18 @@
+1. Everything needs to be manually checked and done consistently.
+2. All of the MRI processing has been done for the old data, but I need to: 
+    a. Create batch anatomical svk_roi_analysis for those with and without t1va files. 
+    b. Create batch diffusion svk_roi_analysis. 
+    c. Move all perf_biopsy information over from /data/bioe4/po1_preop_recur & write script to collect data (done).
+    d. Re-run spectroscopy analysis using Sarah's scripts on all data. 
+3. Once this is complete, we need to manually QC each biopsy: 
+    a. Is it in the ventricles? Is it in a hematoma? Is it in the dura? 
+    b. What is the primary outcome? QC each outcome assignment as TxE or rHGG using path notes & scores.  
+    c. Do necrosis scores line up with necrosis imaging? 
+4. Finally, with a list of good biopsies that represent the true imaging and the true outcome, we can try to associate outcome with imaging parameters: 
+    a. Create boxplots and histograms that represent the biopsy imaging parameters by category of outcome
+    b. Use RMANOVA, GLMM, GEE to associate parameters with outcome
+    c. Use complete data (all MR parameters complete) to attempt to classify via random forest
+    d. Write up results. 
+    
+    
+    
