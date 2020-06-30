@@ -2,7 +2,7 @@
 #  Welcome to MultiParametricMRI 
 
 ## Introduction
-In this analysis, I did my best to explore the relationship between MR parameters derived from regions of interest that corresponded to image-guided tissue samples and their pathological diagnosis. This is all in an attempt to avoid the complications of tissue heterogeneity and the coexistence of treatment-induced injury and recurrent glioma within the same patient. 
+In this analysis, I explored the relationship between MR parameters derived from regions of interest that corresponded to image-guided tissue samples and their pathological diagnosis. This is all in an attempt to avoid the complications of tissue heterogeneity and the coexistence of treatment-induced injury and recurrent glioma within the same patient. 
 
 ## Organization
 In this analysis, there were many moving parts. I had to write a lot of software to get my pipelines to work smoothly and ensure that I had the most representative data for my cohorts. Many of the pre-processing steps to ensure the resolution of my ROIs were the same as my images are not recorded here, but are found in my other github repo for preop processing. This analysis focuses on agglomerating the generated data, and analyzing it. I have broken down my analysis into 5 categories: 
